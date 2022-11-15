@@ -1,0 +1,574 @@
+/* Fonts */
+@font-face {
+	font-family: 'bello-pro';
+	src: url('../fonts/bello-pro.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'museo-slab';
+	src: url('../fonts/museo-slab-300.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'museo-slab';
+	src: url('../fonts/museo-slab-300-italic.woff2') format('woff2');
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'museo-slab';
+	src: url('../fonts/museo-slab-500.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'museo-slab';
+	src: url('../fonts/museo-slab-500-italic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+}
+
+html {
+	accent-color: #c42419;
+	background: #fafafa;
+	caret-color: #c42419;
+	color: #032c36;
+	scrollbar-color: #c42419 #fafafa;
+}
+
+:focus {
+	outline-color: currentColor;
+	outline-offset: .25rem;
+	isolation: isolate;
+}
+
+:focus:not(:focus-visible) {
+	outline-color: transparent;
+	isolation: auto;
+}
+
+:focus-visible {
+	outline-color: currentColor;
+	outline-offset: .25rem;
+	isolation: isolate;
+}
+
+::selection {
+	background-color: #c42419;
+	color: #fafafa;
+	/* For [contenteditable] */
+	-webkit-text-fill-color: #fafafa;
+}
+
+::marker {
+	color: #c42419;
+}
+
+body {
+	display: grid;
+	font: normal 400 1rem/1.5 sans-serif;
+	font-family: "museo-slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-rows:  3rem 1fr 4rem;
+	margin: 0 auto;
+	min-height: 100vh;
+	overflow-x: hidden;
+	text-rendering: optimizeSpeed;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+input,
+button,
+textarea,
+select {
+	border-style: solid;
+	font: inherit;
+	max-width: 100%;
+}
+
+fieldset {
+	min-width: 0;
+}
+
+body:hover [tabindex="-1"]:focus {
+	outline-color: transparent;
+	isolation: auto;
+}
+
+a:not([class]) {
+	color: #c42419;
+	text-decoration-skip-ink: auto;
+}
+
+a:hover,
+a:focus {
+	color: #971c13;
+}
+
+[hidden],
+[role="alert"]:empty {
+	display: none;
+}
+
+a svg,
+button svg {
+	pointer-events: none;
+}
+
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+abbr {
+	border-bottom: 1px dotted;
+	cursor: help;
+	font: normal 400 1em/1.5 "museo-slab";
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+code:not([class]) {
+	color: rebeccapurple;
+	outline: 1px solid;
+	outline-offset: 2px;
+}
+
+b,
+dt,
+strong {
+	font-weight: bold;
+}
+
+q,
+blockquote {
+	font-style: italic;
+
+	&:lang(fr) {
+		quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D" "\2018" "\2019";
+	}
+
+	&:lang(en) {
+		quotes: "\201C" "\201D" "\2018" "\2019";
+	}
+}
+
+blockquote::before { content: open-quote; }
+blockquote::after { content: close-quote; }
+
+summary {
+	cursor: pointer;
+}
+
+:not(pre) > :is(code, kbd, var) {
+	border: 1px solid;
+	border-radius: 2px;
+	box-sizing: border-box;
+	color: #c42419;
+	font: 400 1em/1.1 "museo-slab";
+	margin-top: 0;
+	padding: 0 .2em;
+	white-space: nowrap;
+}
+
+var {
+	border-style: dashed;
+}
+
+pre,
+style {
+	background: #032c36;
+	border: 0;
+	border-radius: .5rem 0 0 .5rem;
+	color: #fafafa;
+	display: block;
+	font-family: "Fira Mono", "Consolas", "Monaco", "Andale Mono", monospace;
+	line-height: 1.65rem;
+	hyphens: none;
+	tab-size: 4;
+	overflow-x: auto;
+	padding: 1rem;
+	white-space: pre;
+}
+
+pre[class],
+code[class] {
+	background-color: transparent;
+	color: inherit;
+	height: 100%;
+}
+
+/* @see https://css-tricks.com/css-scroll-snap-slide-deck/ */
+style {
+	height: 100%;
+}
+
+[required] {
+	background-position: calc(100% - .75rem) 50%;
+	background-size: 1rem;
+}
+
+[required]:valid {
+	border-color: #5a8b02;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%235a8b02' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+}
+
+[required]:invalid {
+	border-color: #df0045;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23df0045'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Layout */
+header,
+footer {
+	padding: 1rem;
+}
+
+header,
+section footer {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+footer {
+	ul {
+		display: flex;
+	}
+
+	li {
+		margin-right: .5rem;
+	}
+}
+
+main {
+	counter-reset: slides;
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-columns: 1fr;
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scroll-snap-type: y proximity;
+}
+
+section {
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, .1);
+	counter-increment: slides;
+	height: max-content;
+	padding: 3rem 1rem;
+	position: relative;
+	scroll-snap-align: start;
+	width: 100vw;
+}
+
+/* Content */
+h1 {
+	font: 700 1rem/1.1 "museo-slab";
+	margin: 0;
+}
+
+.h1 {
+	font: 700 3rem/1.1 "bello-pro";
+}
+
+h2, .h2 {
+	font: 700 2.5rem/1.1 "bello-pro";
+
+	[aria-hidden] {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	+ dl {
+		align-items: center;
+		color: #767676;
+		display: flex;
+		margin: .5rem 0;
+
+		dd {
+			margin: 0 2rem 0 .5rem;
+		}
+	}
+}
+
+h3, .h3,
+summary {
+	font: 500 2rem/1.1 "museo-slab";
+}
+
+h4 {
+	font: 700 1.75rem/1.1 "museo-slab";
+}
+
+h5, h6 {
+	font: 500 1.5rem/1.1 "museo-slab";
+}
+
+small,
+.small {
+	font: 400 1.25rem/1 "museo-slab";
+}
+
+header a {
+	font-family: "bello-pro", sans-serif;
+}
+
+section {
+	[hreflang="en"]::after {
+		content: " (en anglais)";
+	}
+
+	:is(p, ul, ol) {
+		font-size: 1.25rem;
+		font-weight: 300;
+	}
+
+	> :first-child,
+	:is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+		margin-top: 0;
+	}
+
+	> :last-child:not([class]) {
+		margin-bottom: 0;
+	}
+
+	&::before {
+		--integer: calc(var(--slides));
+		counter-reset: total var(--integer);
+		background-color: #fafafa;
+		border-top: 1px solid rgba(0, 0, 0, .1);
+		border-left: 1px solid rgba(0, 0, 0, .1);
+		border-radius: 1rem 0 0 0;
+		bottom: -1px;
+		content: counter(slides) " / " counter(total);
+		font: 700 1rem/2 "museo-slab";
+		padding: .5rem;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		width: 5rem;
+		z-index: 2;
+	}
+}
+
+.centered {
+	display: grid;
+	place-content: center;
+}
+
+.style {
+	align-items: center;
+	background-color: #032c36;
+	border-radius: 0 0 0 .5rem;
+	display: grid;
+	font-size: 1rem;
+	overflow-y: hidden;
+	resize: horizontal;
+}
+
+.markup {
+	border-color: rgba(0, 0, 0, .1);
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	margin: 0 0 1rem;
+	padding: 0 0 1rem;
+}
+
+.lead {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.emoji {
+	display: inline-block;
+	font-family: "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "fantasy";
+	height: 1em;
+	line-height: 1;
+	margin-left: .25ch;
+	width: 1em;
+}
+
+/* Demos */
+
+
+/* Utilities */
+.d-flex {
+	display: flex;
+}
+
+.d-block {
+	display: block;
+}
+
+.d-grid,
+[class^="grid"] {
+	display: grid;
+}
+
+.m-0 {
+	margin: 0;
+}
+
+.m-auto {
+	margin: auto;
+}
+
+.mt-1 {
+	margin-top: 1rem;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.visually-hidden {
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important;
+	clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important;
+}
+
+/* Responsive */
+@media (max-width: 60rem) {
+	:target {
+		scroll-margin-top: 6rem;
+	}
+
+	section {
+		border-bottom: 2px solid #fafafa;
+
+		+ section {
+			border-top: 1px solid rgba(0, 0, 0, .1);
+		}
+	}
+}
+
+@media screen and (min-width: 60rem) {
+	body {
+		max-width: 80vw;
+	}
+
+	main {
+		grid-auto-flow: column;
+		height: 100%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+	}
+
+	section {
+		border-radius: .5rem;
+		height: 100%;
+		margin: auto;
+		max-height: 80vh;
+		padding: 2rem;
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
+		width: 80vw;
+
+		&::before {
+			right: -1px;
+		}
+	}
+
+	.demo {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto 1fr;
+		padding: 0;
+
+		> :first-child {
+			border-bottom: 1px solid rgba(0, 0, 0, .1);
+			grid-column: span 2;
+			margin: 1rem 1rem 0;
+			padding-bottom: 1rem;
+		}
+	}
+
+	.style {
+		font-size: 1.35rem;
+	}
+
+	.markup {
+		border-width: 0 1px 0 0;
+		margin: 0 1rem 0 0;
+		padding: 0 1rem 0 0;
+	}
+
+	.h1 {
+		font-size: 5rem;
+	}
+
+	h2, .h2 {
+		font-size: 2.4rem;
+	}
+
+	section :is(p, ul, ol, blockquote, .lead) {
+		font-size: 1.5rem;
+	}
+
+	.grid-1-2 {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

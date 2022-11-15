@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Sujet</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sujet — Événement et date">
+	<meta name="author" content="Gaël Poupard">
+	<link rel="icon" href="favicon.ico" sizes="any">
+	<link rel="shortcut icon" href="img/favicon.svg" type="image/svg+xml">
+	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="fonts/bello-pro.woff2"/>
+	<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="fonts/museo-slab-300.woff2"/>
+	<link rel="stylesheet" href="css/deck.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/prism.min.css" type="text/css" media="screen">
+</head>
+<body>
+<header role="banner">
+	<a href="https://www.ffoodd.fr">ffoodd</a>
+	<h1>Sujet</h1>
+</header>
+
+<main role="main">
+	<section id="slide-1" class="d-flex flex-column justify-between">
+		<span class="h1">Sujet</span>
+		<footer>
+			<p>Raconté par <a href="https://www.ffoodd.fr">Gaël Poupard</a></p>
+			<p>
+				<a href="https://www.groupeonepoint.com/fr/">
+					<img src="img/onepoint.svg" width="166" height="81" alt="onepoint">
+				</a>
+			</p>
+		</footer>
+	</section>
+
+	<section id="slide-2">
+		<h2>Titre</h2>
+		<dl>
+			<dt>Métadonnée</dt>
+			<dd>Valeur</dd>
+			<dt>Métadonnée</dt>
+			<dd>Valeur</dd>
+		</dl>
+		<p class="lead">Préambule</p>
+		<p>Paragraphe</p>
+	</section>
+	<section id="slide-3" class="demo">
+		<h3 class="h2">Slide avec code</h3>
+		<div class="markup">
+			<pre class="language-markup"><code class="language-markup">&lt;label for="language"&gt;
+	Quel est le meilleur langage de programmation&nbsp;?
+&lt;/label&gt;
+&lt;input id="language" type="text" list="languages"&gt;
+&lt;datalist id="languages"&gt;
+	&lt;option&gt;HTML&lt;/option&gt;
+	&lt;option&gt;CSS&lt;/option&gt;
+	&lt;option&gt;SVG&lt;/option&gt;
+&lt;/datalist&gt;
+				</code>
+			</pre>
+		</div>
+		<div class="playground">
+			<form>
+				<p>
+					<label for="language">Quel est le meilleur langage de programmation&nbsp;?</label>
+					<input id="language" type="text" list="languages">
+					<datalist id="languages">
+						<option>HTML</option>
+						<option>CSS</option>
+						<option>SVG</option>
+					</datalist>
+				</p>
+				<button type="submit">Valider</button>
+			</form>
+		</div>
+	</section>
+	<section id="slide-4" class="demo">
+		<h3 class="h2">Slide avec <i lang="en">live coding</i> CSS</h3>
+		<div class="style">
+<style contenteditable class="highlight--none">.modern-container {
+	display: grid;
+	height: 100%;
+	place-content: center;
+}
+
+.box {
+	aspect-ratio: 1;
+	/* Changez la couleur, pour voir ! */
+	background-color: rebeccapurple;
+	color: white;
+	padding: 1rem;
+}</style>
+		</div>
+		<div class="playground d-flex">
+			<div class="modern-container m-auto">
+				<div class="box">container</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="slide-5">
+		<h2>Merci</h2>
+		<h3>Et à bientôt <span aria-hidden="true">&nbsp;&#128522;</span></h3>
+		<h4>Crédits</h4>
+		<ul>
+			<li>Pictogrammes&nbsp;: <a hreflang="en" href="https://thenounproject.com/marekpolakovic/collection/rounded-ui">Rounded UI</a> —&nbsp;par <a hreflang="en" href="https://www.marekpolakovic.sk/">Marek Polakovic</a>&nbsp;;</li>
+			<li>Emojis&nbsp;: <a hreflang="en" href="https://github.com/twitter/twemoji">Twemoji</a> —&nbsp;par Twitter&nbsp;;</li>
+			<li>Typographie de titraille&nbsp;: <a hreflang="en" href="https://typekit.com/fonts/bello-pro">Bello Pro</a> —&nbsp;créée par <a hreflang="en" href="https://www.underware.nl/">Underware</a>&nbsp;;</li>
+			<li>Typographie de labeur&nbsp;: <a hreflang="en" href="https://typekit.com/fonts/museo-slab">Museo Slab</a> —&nbsp;créée par <a hreflang="en" href="https://www.exljbris.com/">Exljbris</a>&nbsp;;</li>
+			<li>Moteur de présentation inspiré de <a hreflang="en" href="https://css-tricks.com/css-scroll-snap-slide-deck/">"<cite lang="en">CSS scroll-snap slide deck that supports live coding</cite>" de Stephanie Eckles sur Smashing Magazine</a>.</li>
+		</ul>
+	</section>
+</main>
+
+<footer role="contentinfo">
+	<ul role="list">
+		<li><a href="https://www.ffoodd.fr">
+			<img src="img/ffoodd.svg" alt="Blog de Gaël Poupard" height="32" width="32">
+		</a></li>
+		<li><a href="https://twitter.com/ffoodd">
+			<img src="img/twitter.svg" alt="@ffoodd_fr sur Twitter" height="32" width="32">
+		</a></li>
+		<li><a hreflang="en" href="https://github.com/ffoodd/">
+			<img src="img/github.svg" alt="@ffoodd sur Github" height="32" width="32">
+		</a></li>
+	</ul>
+</footer>
+
+<script src="js/prism.min.js"></script>
+<script src="js/twemoji.min.js"></script>
+<script>
+	twemoji.parse(document.body, {folder: 'svg', ext: '.svg'});
+	document.addEventListener('DOMContentLoaded', () => {
+		document.body.style.setProperty(
+			'--slides', String(document.querySelector('main').childElementCount)
+		);
+
+		let io = new IntersectionObserver(entries => {
+			if (entries[0].isIntersecting === true) {
+				history.pushState({}, "", `#${entries[0].target.id}`);
+			}
+		}, {
+			root: document.querySelector('main'),
+			threshold: [1]
+		});
+
+		const slides = document.querySelectorAll('section[id]');
+		for (let i = 0; i < slides.length; i++) {
+			io.observe(slides[i]);
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+	"extends": [
+		"html-validate:recommended"
+	],
+	"rules": {
+		"no-redundant-role": "off",
+		"doctype-style": "off"
+	}
+}
