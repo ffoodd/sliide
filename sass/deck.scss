@@ -289,6 +289,8 @@ main {
 section {
 	background-color: #fff;
 	border: 1px solid rgba(0, 0, 0, .1);
+	content-visibility: auto;
+	contain-intrinsic-size: 1px 5000px;
 	counter-increment: slides;
 	height: max-content;
 	padding: 3rem 1rem;
