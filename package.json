@@ -16,7 +16,7 @@
 		"test:html": "html-validate \"*.html\"",
 		"test:a11y": "pa11y-ci '*.html' -c .pa11yci.json",
 		"start": "concurrently --kill-others \"npm:watch\" \"npm:browser:start\"",
-		"browser:start": "browser-sync ./ -w --no-ui --https",
+		"browser:start": "servor --browse --reload --secure",
 		"build": "concurrently --kill-others \"npm:build:*\"",
 		"prebuild:css": "sass ./sass:./css --style compressed --no-source-map",
 		"build:css": "postcss ./css/*.css -r -u autoprefixer cssnano --no-map",
@@ -31,7 +31,6 @@
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.8",
-		"browser-sync": "^2.27.9",
 		"concurrently": "^7.3.0",
 		"cssnano": "^5.1.13",
 		"html-validate": "^7.1.2",
@@ -42,6 +41,7 @@
 		"postcss-cli": "^10.0.0",
 		"purgecss": "^4.1.3",
 		"sass": "^1.54.8",
+		"servor": "^4.0.2",
 		"svgo": "^2.8.0",
 		"terser": "^5.15.0"
 	}
