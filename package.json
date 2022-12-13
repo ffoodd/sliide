@@ -22,7 +22,7 @@
 		"build:css": "postcss ./css/*.css -r -u autoprefixer cssnano --no-map",
 		"postbuild:css": "purgecss --css ./css/deck.css --content *.html js/*.js --output css/ --font-face --keyframes --variables",
 		"build:js": "concurrently --kill-others \"npm:prism\" \"npm:twemoji\"",
-		"build:svg": "svgo -f img/*.svg -f -r --eol=lf --disable=removeViewBox,removeTitle",
+		"build:svg": "svgo img/*.svg",
 		"prism": "terser ./js/prism.js -o ./js/prism.min.js -c -m",
 		"twemoji": "terser ./js/twemoji.js -o ./js/twemoji.min.js -c -m",
 		"watch": "concurrently --kill-others \"npm:watch:*\"",
