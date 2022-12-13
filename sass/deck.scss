@@ -96,8 +96,9 @@ body {
 }
 
 img {
-	max-width: 100%;
 	display: block;
+	height: auto;
+	max-width: 100%;
 }
 
 input,
@@ -155,6 +156,8 @@ abbr {
 
 code:not([class]) {
 	color: rebeccapurple;
+	font-style: normal;
+	font-weight: normal;
 	outline: 1px solid;
 	outline-offset: 2px;
 }
@@ -438,7 +441,6 @@ section {
 	display: block;
 }
 
-.d-grid,
 [class^="grid"] {
 	display: grid;
 }
@@ -568,6 +570,10 @@ section {
 
 	.grid-1-2 {
 		grid-template-columns: 1fr 2fr;
+	}
+
+	.grid-2-1 {
+		grid-template-columns: 2fr 1fr;
 	}
 
 	.grid-2 {
