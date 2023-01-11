@@ -215,7 +215,7 @@ style {
 	hyphens: none;
 	tab-size: 4;
 	overflow-x: auto;
-	padding: 1rem;
+	padding: 1rem 0;
 	white-space: pre;
 }
 
@@ -283,7 +283,7 @@ main {
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: 1fr;
-	height: 100vh;
+	height: calc(100vh - 7rem);
 	overflow-y: auto;
 	overflow-x: hidden;
 	scroll-snap-type: y proximity;
@@ -407,12 +407,19 @@ section {
 	resize: horizontal;
 }
 
-.markup {
-	border-color: rgba(0, 0, 0, .1);
-	border-style: solid;
-	border-width: 0 0 1px 0;
-	margin: 0 0 1rem;
-	padding: 0 0 1rem;
+.demo > :first-child {
+	+ * {
+		border-color: rgba(0, 0, 0, .1);
+		border-style: solid;
+		border-width: 0 0 1px 0;
+		margin: 0 0 1rem;
+		padding: 0 0 1rem;
+	}
+
+	> .h2,
+	> .lead {
+		margin: 0;
+	}
 }
 
 .lead {
@@ -498,10 +505,10 @@ section {
 
 	section {
 		border-bottom: 2px solid #fafafa;
+	}
 
-		+ section {
-			border-top: 1px solid rgba(0, 0, 0, .1);
-		}
+	[role="contentinfo"] {
+		border-top: 1px solid rgba(0, 0, 0, .1);
 	}
 }
 
@@ -532,6 +539,11 @@ section {
 		}
 	}
 
+	pre,
+	style {
+		padding: 1rem;
+	}
+
 	.demo {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -543,17 +555,17 @@ section {
 			grid-column: span 2;
 			margin: 1rem 1rem 0;
 			padding-bottom: 1rem;
+
+			+ * {
+				border-width: 0 1px 0 0;
+				margin: 0 1rem 0 0;
+				padding: 0 1rem 0 0;
+			}
 		}
 	}
 
 	.style {
 		font-size: 1.35rem;
-	}
-
-	.markup {
-		border-width: 0 1px 0 0;
-		margin: 0 1rem 0 0;
-		padding: 0 1rem 0 0;
 	}
 
 	.h1 {
