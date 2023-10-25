@@ -53,6 +53,8 @@ html {
 	caret-color: #c42419;
 	color: #032c36;
 	scrollbar-color: #c42419 #fafafa;
+	scroll-behavior: smooth;
+	font-synthesis: none;
 }
 
 :focus {

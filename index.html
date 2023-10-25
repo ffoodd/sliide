@@ -127,6 +127,7 @@
 <script src="js/twemoji.min.js"></script>
 <script>
 	twemoji.parse(document.body, {folder: 'svg', ext: '.svg'});
+
 	document.addEventListener('DOMContentLoaded', () => {
 		document.body.style.setProperty(
 			'--slides', String(document.querySelector('main').childElementCount)
@@ -145,6 +146,26 @@
 		for (let i = 0; i < slides.length; i++) {
 			io.observe(slides[i]);
 		}
+
+		document.addEventListener('keydown', event => {
+			const index = Number(window.location.hash.split('-')[1]);
+			let id = null;
+			switch (event.key) {
+				case 'PageDown':
+					id = `slide-${String(index + 1)}`;
+					break;
+				case 'PageUp':
+					id = `slide-${String(index - 1)}`;
+					break;
+				default:
+					break;
+			}
+
+			if (id !== null) {
+				document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+				history.pushState({}, '', `#${id}`);
+			}
+		});
 	});
 </script>
 </body>
