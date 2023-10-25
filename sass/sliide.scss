@@ -49,7 +49,7 @@
 
 html {
 	accent-color: #c42419;
-	background: #fafafa;
+	background: #fff;
 	caret-color: #c42419;
 	color: #032c36;
 	scrollbar-color: #c42419 #fafafa;
@@ -84,21 +84,18 @@ html {
 }
 
 body {
-	display: grid;
 	font: normal 400 1rem/1.5 sans-serif;
 	font-family: "museo-slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-	grid-template-columns: minmax(0, 1fr);
-	grid-template-rows:  3rem 1fr 4rem;
-	margin: 0 auto;
-	min-height: 100vh;
+	margin: 0;
+	min-block-size: 100vh;
 	overflow-x: hidden;
 	text-rendering: optimizeSpeed;
 }
 
 img {
 	display: block;
-	height: auto;
-	max-width: 100%;
+	block-size: auto;
+	max-inline-size: 100%;
 }
 
 input,
@@ -107,11 +104,11 @@ textarea,
 select {
 	border-style: solid;
 	font: inherit;
-	max-width: 100%;
+	max-inline-size: 100%;
 }
 
 fieldset {
-	min-width: 0;
+	min-inline-size: 0;
 }
 
 body:hover [tabindex="-1"]:focus {
@@ -147,7 +144,7 @@ ol[role="list"] {
 }
 
 abbr {
-	border-bottom: 1px dotted;
+	border-block-end: 1px dotted;
 	cursor: help;
 	font: normal 400 1em/1.5 "museo-slab";
 	text-decoration: none;
@@ -166,6 +163,17 @@ b,
 dt,
 strong {
 	font-weight: bold;
+}
+
+dd::before {
+	content: "→ ";
+}
+
+hr {
+	border: 0;
+	border-block-start: 1px solid;
+	margin: 3rem 0;
+	opacity: .25;
 }
 
 q,
@@ -194,7 +202,7 @@ summary {
 	box-sizing: border-box;
 	color: #c42419;
 	font: 400 1em/1.1 "museo-slab";
-	margin-top: 0;
+	margin-block-start: 0;
 	padding: 0 .2em;
 	white-space: nowrap;
 }
@@ -211,6 +219,7 @@ style {
 	color: #fafafa;
 	display: block;
 	font-family: "Fira Mono", "Consolas", "Monaco", "Andale Mono", monospace;
+	font-size: .875rem;
 	line-height: 1.65rem;
 	hyphens: none;
 	tab-size: 4;
@@ -223,12 +232,12 @@ pre[class],
 code[class] {
 	background-color: transparent;
 	color: inherit;
-	height: 100%;
+	max-block-size: 100%;
 }
 
 /* @see https://css-tricks.com/css-scroll-snap-slide-deck/ */
 style {
-	height: 100%;
+	block-size: 100%;
 }
 
 [required] {
@@ -274,7 +283,11 @@ footer {
 	}
 
 	li {
-		margin-right: .5rem;
+		margin-inline-end: .5rem;
+	}
+
+	p {
+		margin: 0 2rem 0 0;
 	}
 }
 
@@ -283,23 +296,21 @@ main {
 	display: grid;
 	grid-auto-flow: row;
 	grid-template-columns: 1fr;
-	height: calc(100vh - 7rem);
+	min-block-size: 100vh;
 	overflow-y: auto;
 	overflow-x: hidden;
 	scroll-snap-type: y proximity;
 }
 
 section {
-	background-color: #fff;
-	border: 1px solid rgba(0, 0, 0, .1);
 	content-visibility: auto;
 	contain-intrinsic-size: 1px 5000px;
 	counter-increment: slides;
-	height: max-content;
+	block-size: max-content;
 	padding: 3rem 1rem;
 	position: relative;
 	scroll-snap-align: start;
-	width: 100vw;
+	inline-size: 100vw;
 }
 
 /* Content */
@@ -359,35 +370,31 @@ section {
 		content: " (en anglais)";
 	}
 
-	:is(p, ul, ol) {
+	:is(p, ul, ol, dl) {
 		font-size: 1.25rem;
 		font-weight: 300;
 	}
 
 	> :first-child,
 	:is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
-		margin-top: 0;
+		margin-block-start: 0;
 	}
 
 	> :last-child:not([class]) {
-		margin-bottom: 0;
+		margin-block-end: 0;
 	}
 
 	&::before {
 		--integer: calc(var(--slides));
 		counter-reset: total var(--integer);
-		background-color: #fafafa;
-		border-top: 1px solid rgba(0, 0, 0, .1);
-		border-left: 1px solid rgba(0, 0, 0, .1);
-		border-radius: 1rem 0 0 0;
-		bottom: -1px;
+		inset-block-end: 0;
 		content: counter(slides) " / " counter(total);
 		font: 700 1rem/2 "museo-slab";
 		padding: .5rem;
 		position: absolute;
-		right: 0;
+		inset-inline-end: 0;
 		text-align: center;
-		width: 5rem;
+		inline-size: 5rem;
 		z-index: 2;
 	}
 }
@@ -430,10 +437,10 @@ section {
 .emoji {
 	display: inline-block;
 	font-family: "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "fantasy";
-	height: 1em;
+	block-size: 1em;
 	line-height: 1;
-	margin-left: .25ch;
-	width: 1em;
+	margin-inline-start: .25ch;
+	inline-size: 1em;
 }
 
 /* Demos */
@@ -461,11 +468,15 @@ section {
 }
 
 .mt-1 {
-	margin-top: 1rem;
+	margin-block-start: 1rem;
+}
+
+.mb-0 {
+	margin-block-end: 0;
 }
 
 .w-100 {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .justify-between {
@@ -488,12 +499,12 @@ section {
 	border: 0 !important;
 	clip: rect(1px, 1px, 1px, 1px) !important;
 	clip-path: inset(50%) !important;
-	height: 1px !important;
+	block-size: 1px !important;
 	margin: -1px !important;
 	overflow: hidden !important;
 	padding: 0 !important;
 	position: absolute !important;
-	width: 1px !important;
+	inline-size: 1px !important;
 	white-space: nowrap !important;
 }
 
@@ -504,19 +515,19 @@ section {
 	}
 
 	section {
-		border-bottom: 2px solid #fafafa;
+		border-block-end: 2px solid #fafafa;
+
+		& ~ & {
+			padding-block-start: 2rem;
+		}
 	}
 
 	[role="contentinfo"] {
-		border-top: 1px solid rgba(0, 0, 0, .1);
+		border-block-start: 1px solid rgba(0, 0, 0, .1);
 	}
 }
 
 @media screen and (min-width: 60rem) {
-	body {
-		max-width: 80vw;
-	}
-
 	main {
 		grid-auto-flow: column;
 		height: 100%;
@@ -525,22 +536,16 @@ section {
 	}
 
 	section {
-		border-radius: .5rem;
-		height: 100%;
-		margin: auto;
-		max-height: 80vh;
+		block-size: 100%;
+		max-block-size: 100vh;
 		padding: 2rem;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
-		width: 80vw;
-
-		&::before {
-			right: -1px;
-		}
 	}
 
 	pre,
 	style {
+		font-size: 1.25rem;
 		padding: 1rem;
 	}
 
@@ -551,10 +556,10 @@ section {
 		padding: 0;
 
 		> :first-child {
-			border-bottom: 1px solid rgba(0, 0, 0, .1);
+			border-block-end: 1px solid rgba(0, 0, 0, .1);
 			grid-column: span 2;
 			margin: 1rem 1rem 0;
-			padding-bottom: 1rem;
+			padding-block-end: 1rem;
 
 			+ * {
 				border-width: 0 1px 0 0;
@@ -573,11 +578,15 @@ section {
 	}
 
 	h2, .h2 {
-		font-size: 2.4rem;
+		font-size: 3.6rem;
 	}
 
-	section :is(p, ul, ol, blockquote, .lead) {
+	section :is(p, ul, ol, dl, blockquote, .lead) {
 		font-size: 1.5rem;
+	}
+
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr);
 	}
 
 	.grid-1-2 {
@@ -586,9 +595,5 @@ section {
 
 	.grid-2-1 {
 		grid-template-columns: 2fr 1fr;
-	}
-
-	.grid-2 {
-		grid-template-columns: repeat(2, 1fr);
 	}
 }
