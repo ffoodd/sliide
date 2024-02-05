@@ -52,7 +52,6 @@
 		<p class="lead">Préambule</p>
 		<p>Paragraphe</p>
 	</section>
-	<aside id="note-2">Test de note</aside>
 
 	<section id="slide-3" class="demo">
 		<h3 class="h2">Slide avec code</h3>
@@ -84,7 +83,6 @@
 			</form>
 		</div>
 	</section>
-	<aside id="note-3">Test de note</aside>
 
 	<section id="slide-4" class="demo">
 		<h3 class="h2">Slide avec <i lang="en">live coding</i> CSS</h3>
@@ -110,8 +108,6 @@
 			</div>
 		</div>
 	</section>
-	<aside id="note-4">Test de note</aside>
-
 
 	<section id="slide-5">
 		<h2>Merci</h2>
@@ -134,49 +130,50 @@
 
 	document.addEventListener('DOMContentLoaded', () => {
 		const slides = document.querySelectorAll('section[id]');
+		const notes = document.querySelectorAll('aside[id]');
 
 		// Nombre total de slides, pour la pagination
-		document.body.style.setProperty(
-			'--slides', String(slides.length)
-		);
-
+		document.body.style.setProperty('--slides', String(slides.length));
 		// Vue présentateur
-		const notes = document.querySelectorAll('aside[id]');
-		notes.forEach(
-			note => note.hidden = true
-		);
+		document.body.style.setProperty('--next', String(`-moz-element(#slide-2)`));
+		notes.forEach(note => note.hidden = true);
 
 		// Gestion de l’historique
+		// @fixme On a un problème en cas de demi-pixel…
 		let io = new IntersectionObserver(entries => {
 			if (entries[0].isIntersecting === true) {
 				history.pushState({}, "", `#${entries[0].target.id}`);
+				let current = Number(entries[0].target.id.split('-')[1]);
+				let next = current + 1;
+				document.body.style.setProperty('--next', String(`-moz-element(#slide-${next})`));
 			}
 		}, {
 			root: document.querySelector('main'),
 			threshold: [1]
 		});
-		slides.forEach(
-			slide =>	io.observe(slide)
-		);
+		slides.forEach(slide =>	io.observe(slide));
 
 		// Gestion de la télécommande
 		document.addEventListener('keydown', event => {
 			const index = Number(window.location.hash.split('-')[1]);
-			let id = null;
+			let id, next = null;
 			switch (event.key) {
 				case 'PageDown':
 					id = `slide-${String(index + 1)}`;
+					next = index + 2;
 					break;
 				case 'PageUp':
 					id = `slide-${String(index - 1)}`;
+					next = index;
 					break;
 				default:
 					break;
 			}
 
-			if (id !== null) {
+			if (id) {
 				document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 				history.pushState({}, '', `#${id}`);
+				document.body.style.setProperty('--next', String(`-moz-element(#slide-${next})`));
 			}
 		});
 	});
