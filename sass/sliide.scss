@@ -354,6 +354,46 @@
 			scroll-snap-align: center;
 			scroll-snap-stop: always;
 		}
+
+		// Vue présentateur
+		.speaker {
+			background: #767676;
+			display: grid;
+			gap: 2rem;
+			grid-template-columns: 75vw 1fr;
+			grid-template-areas: "view next"
+													 "view notes";
+			padding: 2rem;
+
+			&::after {
+				aspect-ratio: 16/9;
+				border-radius: .5rem;
+				box-shadow: 0 0 1rem 0 #000;
+				content: "";
+				background: #fff var(--next) 0 0 / cover;
+				display: block;
+				grid-area: next;
+			}
+
+			main {
+				background: #fff;
+				border-radius: 1rem;
+				box-shadow: 0 0 1rem 0 #000;
+				block-size: calc(100vh - 4rem);
+				grid-area: view;
+				inline-size: 75vw;
+				min-block-size: calc(100vh - 4rem);
+				overflow: auto;
+			}
+
+			section {
+				inline-size: 75vw;
+			}
+
+			aside {
+				grid-area: notes;
+			}
+		}
 	}
 }
 
@@ -603,7 +643,6 @@
 			grid-template-columns: 2fr 1fr;
 		}
 	}
-
 }
 
 @layer preferences {
