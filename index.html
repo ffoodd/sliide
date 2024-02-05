@@ -10,13 +10,14 @@
 	<link rel="stylesheet" href="css/sliide.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/prism.min.css" type="text/css" media="screen">
 </head>
-<body>
+<!-- @todo Toggle sur la classe speaker -->
+<body class="speaker">
 <main role="main">
 	<section id="slide-1" class="d-flex flex-column justify-between">
 		<span class="h1">Sujet</span>
 		<footer>
 			<div class="d-flex">
-				<p class="my-0">Raconté par <a href="https://www.ffoodd.fr">Gaël Poupard</a></p>
+				<p class="mb-0">Raconté par <a href="https://www.ffoodd.fr">Gaël Poupard</a></p>
 				<ul role="list">
 					<li><a href="https://www.ffoodd.fr">
 						<img src="img/ffoodd.svg" alt="Blog de Gaël Poupard" height="32" width="32">
@@ -51,6 +52,8 @@
 		<p class="lead">Préambule</p>
 		<p>Paragraphe</p>
 	</section>
+	<aside id="note-2">Test de note</aside>
+
 	<section id="slide-3" class="demo">
 		<h3 class="h2">Slide avec code</h3>
 		<div class="markup">
@@ -81,6 +84,8 @@
 			</form>
 		</div>
 	</section>
+	<aside id="note-3">Test de note</aside>
+
 	<section id="slide-4" class="demo">
 		<h3 class="h2">Slide avec <i lang="en">live coding</i> CSS</h3>
 		<div class="style">
@@ -105,6 +110,8 @@
 			</div>
 		</div>
 	</section>
+	<aside id="note-4">Test de note</aside>
+
 
 	<section id="slide-5">
 		<h2>Merci</h2>
@@ -126,10 +133,20 @@
 	twemoji.parse(document.body, {folder: 'svg', ext: '.svg'});
 
 	document.addEventListener('DOMContentLoaded', () => {
+		const slides = document.querySelectorAll('section[id]');
+
+		// Nombre total de slides, pour la pagination
 		document.body.style.setProperty(
-			'--slides', String(document.querySelector('main').childElementCount)
+			'--slides', String(slides.length)
 		);
 
+		// Vue présentateur
+		const notes = document.querySelectorAll('aside[id]');
+		notes.forEach(
+			note => note.hidden = true
+		);
+
+		// Gestion de l’historique
 		let io = new IntersectionObserver(entries => {
 			if (entries[0].isIntersecting === true) {
 				history.pushState({}, "", `#${entries[0].target.id}`);
@@ -138,12 +155,11 @@
 			root: document.querySelector('main'),
 			threshold: [1]
 		});
+		slides.forEach(
+			slide =>	io.observe(slide)
+		);
 
-		const slides = document.querySelectorAll('section[id]');
-		for (let i = 0; i < slides.length; i++) {
-			io.observe(slides[i]);
-		}
-
+		// Gestion de la télécommande
 		document.addEventListener('keydown', event => {
 			const index = Number(window.location.hash.split('-')[1]);
 			let id = null;

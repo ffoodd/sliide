@@ -27,12 +27,12 @@
 		"build": "concurrently --kill-others \"npm:build:*\"",
 		"prebuild:css": "sass ./sass:./css --style compressed --no-source-map",
 		"build:css": "postcss ./css/*.css -r -u autoprefixer cssnano --no-map",
-		"postbuild:css": "purgecss --css css/sliide.css --content *.html js/*.js --output css/ --font-face --keyframes --variables",
+		"postbuild:css": "purgecss --css css/sliide.css --content *.html js/*.js --output css/ --keyframes --variables",
 		"build:svg": "svgo img/*.svg",
 		"build:js": "terser ./js/prism.js -o ./js/prism.min.js -c -m",
 		"watch": "concurrently --kill-others \"npm:watch:*\"",
 		"watch:css": "nodemon --watch ./sass --ext scss --exec \"npm run build:css\"",
-		"watch:js": "nodemon --watch ./js --ext js --ignore js/*.min.js --exec \"npm run build:js\"",
+		"watch:js": "nodemon --watch ./js --ext js --ignore js/prism.min.js --exec \"npm run build:js\"",
 		"dependencies": "shx cp -r node_modules/twemoji/dist/twemoji.min.js js/"
 	},
 	"devDependencies": {
