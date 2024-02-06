@@ -360,12 +360,13 @@
 			background: #767676;
 			display: grid;
 			gap: 2rem;
-			grid-template-columns: 75vw 1fr;
 			grid-template-areas: "view next"
 													 "view notes";
+			grid-template-columns: 75vw 1fr;
+			grid-template-rows: min-content 1fr;
 			padding: 2rem;
 
-			&::after {
+			&::before {
 				aspect-ratio: 16/9;
 				border-radius: .5rem;
 				box-shadow: 0 0 1rem 0 #000;
@@ -373,6 +374,15 @@
 				background: #fff var(--next) 0 0 / cover;
 				display: block;
 				grid-area: next;
+			}
+
+			&::after {
+				color: #fff;
+				content: "Notes : \A" attr(data-note);
+				font-size: 1.75rem;
+				grid-area: notes;
+				hyphens: auto;
+				white-space: pre;
 			}
 
 			main {
@@ -389,21 +399,12 @@
 			section {
 				inline-size: 75vw;
 			}
-
-			aside {
-				grid-area: notes;
-			}
 		}
 	}
 }
 
 @layer content {
-	h1 {
-		font: 700 1rem/1.1 "museo-slab";
-		margin: 0;
-	}
-
-	.h1 {
+	h1, .h1 {
 		font: 300 3rem/1.1 "bello-pro";
 	}
 
@@ -464,7 +465,8 @@
 			margin-block-start: 0;
 		}
 
-		> :last-child:not([class]) {
+		> :last-child:not([class]),
+		> :nth-last-child(2):has(+ aside) {
 			margin-block-end: 0;
 		}
 
@@ -552,7 +554,7 @@
 			font-size: 1.35rem;
 		}
 
-		.h1 {
+		h1, .h1 {
 			font-size: 5rem;
 		}
 
