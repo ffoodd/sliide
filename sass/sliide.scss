@@ -579,7 +579,8 @@
 		display: block;
 	}
 
-	[class^="grid"] {
+	.d-grid,
+	[class*="grid"] {
 		display: grid;
 	}
 
