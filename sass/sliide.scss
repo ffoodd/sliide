@@ -344,6 +344,7 @@
 			grid-auto-flow: column;
 			height: 100%;
 			overflow-x: auto;
+			overflow-y: hidden;
 			scroll-snap-type: x mandatory;
 		}
 
@@ -397,6 +398,7 @@
 			}
 
 			section {
+				block-size: calc(100vh - 4rem);
 				inline-size: 75vw;
 			}
 		}
