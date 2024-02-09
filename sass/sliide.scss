@@ -380,10 +380,12 @@
 			&::after {
 				color: #fff;
 				content: "Notes : \A" attr(data-note);
-				font-size: 1.75rem;
+				display: inline-block;
+				font-size: 1.5rem;
 				grid-area: notes;
 				hyphens: auto;
-				white-space: pre;
+				inline-size: calc(25vw - 6rem);
+				white-space: pre-wrap;
 			}
 
 			main {
@@ -400,6 +402,7 @@
 			section {
 				block-size: calc(100vh - 4rem);
 				inline-size: 75vw;
+				overflow: hidden;
 			}
 		}
 	}
