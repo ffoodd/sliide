@@ -126,6 +126,12 @@
 	</section>
 </main>
 
+<div class="timer">
+	<span style="--time: 3600s"></span>h&nbsp;
+	<span style="--time: 60s"></span>m&nbsp;
+	<span style="--time: 1s"></span>s
+</div>
+
 <script src="js/prism.min.js"></script>
 <script src="js/twemoji.min.js"></script>
 <script>
@@ -140,7 +146,7 @@
 		document.body.style.setProperty('--next', String(`-moz-element(#slide-${Number(id) + 1})`));
 		//// Synchro de la vue présentateur
 		if (view) {
-			view.postMessage(`slide-${id}`, 'https://localhost:8080/index.html');
+			view.postMessage(`slide-${id}`, `https://localhost:8080${document.location.pathname}index.html`);
 		}
 		//// Notes dans la vue présentateur
 		if('note' in document.getElementById(`slide-${id}`).dataset) {
@@ -175,7 +181,7 @@
 				// Activer la vue présentateur
 				case 's':
 					if (event.altKey) {
-						view = window.open('https://localhost:8080/index.html', 'speakerView');
+						view = window.open(`https://localhost:8080${document.location.pathname}index.html`, 'speakerView');
 						view.addEventListener('load', () => {
 							view.document.body.classList.add('speaker');
 						})

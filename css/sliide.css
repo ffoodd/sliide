@@ -272,6 +272,17 @@
     scroll-snap-align: start;
     inline-size: 100vw;
   }
+  .timer {
+    display: none;
+  }
+  @keyframes timer {
+    from {
+      transform: translateY(0%);
+    }
+    to {
+      transform: translateY(calc(-10% * var(--base, 10)));
+    }
+  }
   @media (max-width: 60rem) {
     :target {
       scroll-margin-top: 6rem;
@@ -305,9 +316,9 @@
       background: #767676;
       display: grid;
       gap: 2rem;
-      grid-template-areas: "view next" "view notes";
+      grid-template-areas: "view next" "view notes" "view timer";
       grid-template-columns: 75vw 1fr;
-      grid-template-rows: min-content 1fr;
+      grid-template-rows: min-content 1fr min-content;
       padding: 2rem;
     }
     .speaker::before {
@@ -343,6 +354,35 @@
       block-size: calc(100vh - 4rem);
       inline-size: 75vw;
       overflow: hidden;
+    }
+    .speaker .timer {
+      color: #fff;
+      display: flex;
+      font-size: 1.5rem;
+      font-variant-numeric: tabular-nums;
+      grid-area: timer;
+    }
+    .speaker .timer span {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 2rem;
+      overflow: hidden;
+      width: 2ch;
+    }
+    .speaker .timer span::before, .speaker .timer span::after {
+      --base: 10;
+      animation-name: timer;
+      animation-duration: calc(var(--time) * var(--base));
+      animation-timing-function: steps(var(--base), jump-end);
+      animation-iteration-count: infinite;
+      content: "0 1 2 3 4 5 6 7 8 9";
+    }
+    .speaker .timer span::before {
+      animation-duration: calc(var(--time) * 24);
+    }
+    .speaker .timer span ~ span::before {
+      --base: 6;
+      content: "0 1 2 3 4 5";
     }
   }
 }

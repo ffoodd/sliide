@@ -321,6 +321,19 @@
 		inline-size: 100vw;
 	}
 
+	.timer {
+		display: none;
+	}
+
+	@keyframes timer {
+		from {
+			transform: translateY(0%);
+		}
+		to {
+			transform: translateY(calc(-10% * var(--base, 10)));
+		}
+	}
+
 	@media (max-width: 60rem) {
 		:target {
 			scroll-margin-top: 6rem;
@@ -362,9 +375,10 @@
 			display: grid;
 			gap: 2rem;
 			grid-template-areas: "view next"
-													 "view notes";
+													 "view notes"
+													 "view timer";
 			grid-template-columns: 75vw 1fr;
-			grid-template-rows: min-content 1fr;
+			grid-template-rows: min-content 1fr min-content;
 			padding: 2rem;
 
 			&::before {
@@ -403,6 +417,41 @@
 				block-size: calc(100vh - 4rem);
 				inline-size: 75vw;
 				overflow: hidden;
+			}
+
+			.timer {
+				color: #fff;
+				display: flex;
+				font-size: 1.5rem;
+				font-variant-numeric: tabular-nums;
+				grid-area: timer;
+
+				span {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					height: 2rem;
+					overflow: hidden;
+					width: 2ch;
+
+					&::before,
+					&::after {
+						--base: 10;
+						animation-name: timer;
+						animation-duration: calc(var(--time) * var(--base));
+						animation-timing-function: steps(var(--base), jump-end);
+						animation-iteration-count: infinite;
+						content: "0 1 2 3 4 5 6 7 8 9";
+					}
+
+					&::before {
+						animation-duration: calc(var(--time) * 24);
+					}
+
+					~ span::before {
+						--base: 6;
+						content: "0 1 2 3 4 5";
+					}
+				}
 			}
 		}
 	}
