@@ -126,10 +126,18 @@
 	</section>
 </main>
 
-<div class="timer">
-	<span style="--time: 3600s"></span>h&nbsp;
-	<span style="--time: 60s"></span>m&nbsp;
-	<span style="--time: 1s"></span>s
+<div class="timer" style="--duration: 2;">
+	<div class="clock" role="presentation">
+		<span style="--time: 3600s"></span>h&nbsp;
+		<span style="--time: 60s"></span>m&nbsp;
+		<span style="--time: 1s"></span>s
+	</div>
+	<!-- @todo Un minuteur accessible ?
+			 @note https://developer.mozilla.org/fr/docs/Web/HTML/Element/progress
+			 @note https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA/Roles/progressbar_role
+			 @note https://www.magentaa11y.com/checklist-web/progress/
+	<progress role="progressbar" aria-label="Chronomètre"></progress>
+	-->
 </div>
 
 <script src="js/prism.min.js"></script>

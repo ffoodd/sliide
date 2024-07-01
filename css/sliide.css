@@ -283,6 +283,13 @@
       transform: translateY(calc(-10% * var(--base, 10)));
     }
   }
+  @keyframes fill {
+    from {
+      background-position: 0 0;
+      background-size: 100% 100%;
+      inline-size: calc(100% / var(--seconds));
+    }
+  }
   @media (max-width: 60rem) {
     :target {
       scroll-margin-top: 6rem;
@@ -356,20 +363,39 @@
       overflow: hidden;
     }
     .speaker .timer {
-      color: #fff;
-      display: flex;
+      --seconds: calc(var(--duration) * 60);
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1rem 0 #000;
+      display: grid;
       font-size: 1.5rem;
       font-variant-numeric: tabular-nums;
       grid-area: timer;
+      grid-template-rows: 2fr 1fr;
+      padding: 1rem;
     }
-    .speaker .timer span {
+    .speaker .timer::after {
+      animation: calc(var(--seconds) * 1s) fill linear;
+      background-image: linear-gradient(to right, green, orange, red);
+      background-position: 100% 0;
+      background-size: calc(var(--seconds) * 100%) 100%;
+      border-radius: 0.25rem;
+      content: "";
+      grid-row: 2;
+      inline-size: 100%;
+    }
+    .speaker .clock {
+      display: flex;
+      grid-row: 1;
+    }
+    .speaker .clock span {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       height: 2rem;
       overflow: hidden;
       width: 2ch;
     }
-    .speaker .timer span::before, .speaker .timer span::after {
+    .speaker .clock span::before, .speaker .clock span::after {
       --base: 10;
       animation-name: timer;
       animation-duration: calc(var(--time) * var(--base));
@@ -377,11 +403,12 @@
       animation-iteration-count: infinite;
       content: "0 1 2 3 4 5 6 7 8 9";
     }
-    .speaker .timer span::before {
-      animation-duration: calc(var(--time) * 24);
+    .speaker .clock span:first-of-type::before {
+      animation-duration: calc(var(--time) * 24 * 10);
     }
-    .speaker .timer span ~ span::before {
+    .speaker .clock span ~ span::before {
       --base: 6;
+      animation-duration: calc(var(--time) * var(--base) * 10);
       content: "0 1 2 3 4 5";
     }
   }
